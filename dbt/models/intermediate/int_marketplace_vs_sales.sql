@@ -1,8 +1,8 @@
 {{ config(materialized='view') }}
 
 -- # MODEL: int_marketplace_vs_sales
--- # AMACIMIZ:
--- # Kategori bazlı satış ve marketplace verileri karşılaştırılır.
+-- # OUR GOAL:
+-- # Sales and marketplace data are compared by product category.
 
 with sales as (
     select lower(trim(product_category)) as product_category, quantity
