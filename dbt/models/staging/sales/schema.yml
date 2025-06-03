@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_sales_data
+    description: "Cleaned and prepared sales data"
+    columns:
+      - name: transaction_id
+        tests: [not_null, unique]

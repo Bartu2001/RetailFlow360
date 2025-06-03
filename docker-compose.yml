@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  retail_postgres:
+    image: postgres:15
+    container_name: retail_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: bartu
+      POSTGRES_PASSWORD: bartupass
+      POSTGRES_DB: retail360
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./data:/data
+
+  retail_minio:
+    image: minio/minio
+    container_name: retail_minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+
+  retail_dbt:
+    image: ghcr.io/dbt-labs/dbt-bigquery:1.7.9
+    container_name: retail_dbt
+    platform: "linux/amd64"
+    working_dir: /usr/app
+    volumes:
+      - ./dbt:/usr/app
+      - ./creds/data-analytics-36871212-373726a69923.json:/root/.dbt/data-analytics-36871212-373726a69923.json
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+  airflow:
+    build:
+      context: ./airflow
+    container_name: airflow
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    command: webserver
+
+volumes:
+  pgdata:

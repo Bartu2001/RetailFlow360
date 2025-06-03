@@ -1,0 +1,10 @@
+retail360_profile:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: data-analytics-36871212
+      dataset: retail_stg
+      threads: 4
+      keyfile: /root/.dbt/data-analytics-36871212-373726a69923.json

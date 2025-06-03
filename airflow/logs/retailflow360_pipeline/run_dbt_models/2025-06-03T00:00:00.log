@@ -1,0 +1,10 @@
+[2025-06-03 00:00:00] Running command: dbt run
+[2025-06-03 00:00:01] Model stg_sales_data ... OK
+[2025-06-03 00:00:01] Model stg_marketplace_data ... OK
+[2025-06-03 00:00:01] Model stg_inventory_data ... OK
+[2025-06-03 00:00:02] Model stg_iot_data ... OK
+[2025-06-03 00:00:03] Model int_sales_enriched ... OK
+[2025-06-03 00:00:03] Model int_marketplace_vs_sales ... OK
+[2025-06-03 00:00:04] Model mart_sales_dashboard ... OK
+[2025-06-03 00:00:04] Model mart_iot_summary ... OK
+[2025-06-03 00:00:04] Simulated pipeline completed successfully.

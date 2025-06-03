@@ -1,0 +1,26 @@
+name: retail360_dbt_project
+version: 1.0.0
+config-version: 2
+
+profile: retail360_profile
+
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+seed-paths: ["data"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_modules"
+
+models:
+  retail360_dbt_project:
+    marts:
+      +schema: retail_mart
+    intermediate:
+      +schema: retail_int
+    staging:
+      +schema: retail_stg
