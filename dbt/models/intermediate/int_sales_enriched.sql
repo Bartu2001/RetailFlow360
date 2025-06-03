@@ -1,10 +1,10 @@
 {{ config(materialized='view') }}
 
 -- # MODEL: int_sales_enriched
--- # AMACIMIZ:
--- # stg_sales_data ile stg_inventory_data tablosunu
--- # 'product_category' üzerinden birleştiriyoruz.
--- # Her satışa anlık stok ve low_stock flag’i ekleniyor.
+-- # OUR GOAL:
+-- # We join the stg_sales_data and stg_inventory_data tables
+-- # using 'product_category'.
+-- # Each sale is enriched with real-time stock and a low_stock flag.
 
 with sales as (
     select * from {{ ref('stg_sales_data') }}
